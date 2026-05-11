@@ -1,5 +1,5 @@
 "use client";
-
+import { formatCategoryName } from "@/lib/products";
 import { useState } from "react";
 
 import { useParams, useRouter } from "next/navigation";
@@ -126,7 +126,7 @@ export default function ProductDetailPage() {
               
               <div>
                 <Badge className="rounded-full bg-amber-100 text-amber-800 hover:bg-amber-100 mb-5 px-4 py-1">
-                  {product.category}
+                  {formatCategoryName(product.category)}
                 </Badge>
 
                 <h1 className="text-5xl font-light text-gray-950 leading-tight mb-5">

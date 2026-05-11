@@ -1,5 +1,5 @@
 "use client";
-
+import { formatCategoryName } from "@/lib/products";
 import { useState, useMemo } from "react";
 
 import Image from "next/image";
@@ -215,7 +215,7 @@ export default function ProductsPage() {
 
                     <div className="absolute top-4 left-4">
                       <Badge className="rounded-full bg-white/90 text-amber-800 hover:bg-white px-4 py-1 shadow-sm capitalize">
-                        {product.category}
+                        {formatCategoryName(product.category)}
                       </Badge>
                     </div>
 
