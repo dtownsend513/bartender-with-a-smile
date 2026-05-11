@@ -59,7 +59,7 @@ export default function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-black px-10 py-6 text-lg rounded-full transition-all duration-300"
+              className="border border-white/80 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black px-10 py-6 text-lg rounded-full transition-all duration-300"
             >
               Learn More
             </Button>
