@@ -11,10 +11,10 @@ export const products: Product[] = [
     ingredients: ["Olive Oil", "Coconut Oil", "Shea Butter", "Lavender Essential Oil", "Oatmeal", "Sodium Hydroxide"]
   },
   {
-    id: "handmade-soap-collection",
-    name: "Artisan Soap Collection Set",
-    price: 29.99,
-    image: "https://lospoblanos.com/uploads/images/blog/_large/bar_soap_set.jpg",
+    id: "handmade-cream-bar",
+    name: "Cream Bar",
+    price: 10.99,
+    image: "/images/creambar.jpg",
     description: "A curated collection of our most popular handmade soaps, featuring various natural scents and beneficial ingredients.",
     category: "cleansing-bars",
     ingredients: ["Various Natural Oils", "Essential Oils", "Natural Colorants", "Botanicals", "Shea Butter"]
@@ -23,8 +23,8 @@ export const products: Product[] = [
     id: "natural-bar-soaps",
     name: "Natural Cleansing Bar Trio",
     price: 24.99,
-    image: "https://m.media-amazon.com/images/I/81iEPV8bCyL._UF1000,1000_QL80_.jpg",
-    description: "Three individually crafted cleansing bars with unique blends of natural ingredients for different skin needs.",
+    image: "/images/3bars.png",
+    description: "Individually crafted cleansing bars with unique blends of natural ingredients for different skin needs.",
     category: "cleansing-bars",
     ingredients: ["Coconut Oil", "Palm Oil", "Olive Oil", "Natural Fragrances", "Plant-Based Colorants"]
   },

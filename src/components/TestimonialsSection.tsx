@@ -1,98 +1,118 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
     name: "Sarah M.",
     rating: 5,
-    text: "The lavender oatmeal soap is absolutely divine! My sensitive skin has never felt better. The natural ingredients really make a difference.",
-    product: "Lavender Oatmeal Handmade Soap"
+    text: "The lavender oatmeal soap feels gentle and soothing. My skin feels clean without feeling dry.",
+    product: "Lavender Oatmeal Soap",
   },
   {
     id: 2,
     name: "Jessica L.",
     rating: 5,
-    text: "The artisan soap collection set was perfect! Each bar has its own unique scent and they all feel so luxurious. Highly recommend!",
-    product: "Artisan Soap Collection Set"
+    text: "The soap collection was beautiful. Each bar had its own scent, and the packaging made it feel special.",
+    product: "Artisan Soap Collection",
   },
   {
     id: 3,
     name: "Michael R.",
     rating: 5,
-    text: "Love the whipped body butter! It's so rich and creamy, perfect for my dry skin. A little goes a long way and it smells amazing.",
-    product: "Whipped Body Butter"
+    text: "The whipped body butter is rich, smooth, and perfect for dry skin. A little goes a long way.",
+    product: "Whipped Body Butter",
   },
   {
     id: 4,
     name: "Emma C.",
     rating: 5,
-    text: "The Himalayan salt scrub is incredible! My skin feels so smooth and refreshed after using it. Will definitely be ordering more.",
-    product: "Himalayan Pink Salt Scrub"
-  }
+    text: "The salt scrub left my skin feeling soft and refreshed. It feels like a spa product at home.",
+    product: "Himalayan Salt Scrub",
+  },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-16 bg-amber-50">
+    <section className="py-24 bg-[#f8f3ee]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            What Our Customers Say
+        
+        <div className="text-center mb-14">
+          <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
+            Customer Love
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-light text-gray-950 mb-5">
+            Self-Care That Feels Personal
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from real customers who love our handmade products!
+
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Thoughtfully made products for customers who value natural ingredients,
+            beautiful scents, and a softer skincare routine.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="bg-white shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6">
-                {/* Stars */}
-                <div className="flex items-center mb-4">
+            <Card
+              key={testimonial.id}
+              className="relative overflow-hidden rounded-3xl border-0 bg-white shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <CardContent className="p-8">
+                <Quote className="h-8 w-8 text-amber-200 mb-5" />
+
+                <div className="flex items-center mb-5">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                    <Star
+                      key={i}
+                      className="h-5 w-5 fill-amber-400 text-amber-400"
+                    />
                   ))}
                 </div>
 
-                {/* Testimonial Text */}
-                <blockquote className="text-gray-700 mb-4 italic leading-relaxed">
-                  "{testimonial.text}"
+                <blockquote className="text-gray-700 mb-8 leading-relaxed text-lg">
+                  “{testimonial.text}”
                 </blockquote>
 
-                {/* Customer Info */}
-                <div className="border-t pt-4">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                      <p className="text-sm text-gray-500">Verified Purchase</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-amber-700">{testimonial.product}</p>
-                    </div>
+                <div className="border-t border-[#eadfd4] pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-gray-950">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Customer Favorite
+                    </p>
                   </div>
+
+                  <p className="text-sm font-medium text-amber-800">
+                    {testimonial.product}
+                  </p>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Trust indicators */}
-        <div className="mt-12 text-center">
-          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600">
-            <div className="flex items-center gap-2">
-              <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-              <span className="font-semibold">4.9/5 Average Rating</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-semibold">500+ Happy Customers</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-semibold">100% Natural Ingredients</span>
-            </div>
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div className="rounded-3xl bg-white px-6 py-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.2em] text-amber-700 font-semibold mb-2">
+              Small Batch
+            </p>
+            <p className="text-gray-700">Made with care, not mass produced.</p>
+          </div>
+
+          <div className="rounded-3xl bg-white px-6 py-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.2em] text-amber-700 font-semibold mb-2">
+              Plant-Based
+            </p>
+            <p className="text-gray-700">Ingredient-conscious bath and body care.</p>
+          </div>
+
+          <div className="rounded-3xl bg-white px-6 py-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.2em] text-amber-700 font-semibold mb-2">
+              Handmade
+            </p>
+            <p className="text-gray-700">Crafted for a personal self-care experience.</p>
           </div>
         </div>
       </div>

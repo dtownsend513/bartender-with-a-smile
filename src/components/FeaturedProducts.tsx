@@ -14,62 +14,71 @@ export default function FeaturedProducts() {
   const { addToCart } = useCart();
   const [addingToCart, setAddingToCart] = useState<string | null>(null);
 
-  // Get featured products (first 6)
   const featuredProducts = products.slice(0, 6);
 
   const handleAddToCart = async (product: typeof products[0]) => {
     setAddingToCart(product.id);
     addToCart(product);
 
-    // Brief delay for visual feedback
     setTimeout(() => {
       setAddingToCart(null);
     }, 500);
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 bg-[#f8f3ee]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Truly Handmade Bath & Body
+        
+        <div className="text-center mb-14">
+          <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
+            Featured Collection
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-light text-gray-950 mb-5">
+            Handmade Beauty Essentials
           </h2>
+
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            At KoMposition Beauty, our bath & body products are plant based and handmade.
-            Our products are made using only the finest quality ingredients for a flawless
-            and natural look that will last while nourishing the body!
+            Plant-based bath and body care made with quality ingredients,
+            beautiful textures, and a self-care experience designed to feel personal.
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
           {featuredProducts.map((product) => (
-            <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              <div className="relative aspect-square overflow-hidden">
+            <Card
+              key={product.id}
+              className="group border-0 bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            >
+              <div className="relative aspect-square overflow-hidden bg-[#eee4da]">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-3 left-3">
-                  <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200">
+
+                <div className="absolute top-4 left-4">
+                  <Badge className="rounded-full bg-white/90 text-amber-800 hover:bg-white px-4 py-1 shadow-sm">
                     {product.category}
                   </Badge>
                 </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <div className="flex gap-2">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="flex gap-3">
                     <Link href={`/products/${product.id}`}>
-                      <Button size="sm" variant="secondary" className="rounded-full">
+                      <Button
+                        size="icon"
+                        variant="secondary"
+                        className="rounded-full bg-white text-black hover:bg-amber-100 shadow-md"
+                      >
                         <Eye className="h-4 w-4" />
                       </Button>
                     </Link>
+
                     <Button
-                      size="sm"
-                      className="rounded-full bg-amber-600 hover:bg-amber-700"
+                      size="icon"
+                      className="rounded-full bg-amber-200 hover:bg-amber-300 text-black shadow-md"
                       onClick={() => handleAddToCart(product)}
                       disabled={addingToCart === product.id}
                     >
@@ -80,23 +89,27 @@ export default function FeaturedProducts() {
               </div>
 
               <CardContent className="p-6">
-                <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {product.description}
-                </p>
+                <div className="mb-5">
+                  <h3 className="font-semibold text-xl text-gray-950 mb-2 line-clamp-2">
+                    {product.name}
+                  </h3>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-amber-700">
+                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                    {product.description}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-2xl font-semibold text-amber-800">
                     ${product.price.toFixed(2)}
                   </span>
+
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleAddToCart(product)}
                     disabled={addingToCart === product.id}
-                    className="hover:bg-amber-50"
+                    className="rounded-full border-amber-700 text-amber-800 hover:bg-amber-100 hover:text-amber-900"
                   >
                     {addingToCart === product.id ? "Adding..." : "Add to Cart"}
                   </Button>
@@ -106,14 +119,13 @@ export default function FeaturedProducts() {
           ))}
         </div>
 
-        {/* CTA Button */}
         <div className="text-center">
           <Link href="/products">
             <Button
               size="lg"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+              className="bg-black hover:bg-gray-800 text-white px-10 py-6 rounded-full font-semibold text-lg transition-all duration-300"
             >
-              View Our Selection
+              View Full Collection
             </Button>
           </Link>
         </div>

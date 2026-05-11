@@ -3,37 +3,69 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, CreditCard, Shield, Truck } from "lucide-react";
+
+import {
+  ArrowLeft,
+  ShieldCheck,
+  ShoppingBag,
+} from "lucide-react";
+
 import { useCart } from "@/components/CartContext";
 
 export default function CheckoutPage() {
-  const { items, totalPrice, clearCart } = useCart();
+  const { items, totalPrice } = useCart();
+
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmitOrder = async (e: React.FormEvent) => {
+  const tax = totalPrice * 0.08;
+  const finalTotal = totalPrice + tax;
+
+  const handleSubmitOrder = async (
+    e: React.FormEvent
+  ) => {
     e.preventDefault();
+
     setIsProcessing(true);
 
-    // Simulate order processing
     setTimeout(() => {
       setIsProcessing(false);
-      clearCart();
-      alert("Thank you for your order! You will receive a confirmation email shortly.");
-    }, 2000);
+
+      alert(
+        "Stripe integration coming soon. This is currently a demo checkout."
+      );
+    }, 1500);
   };
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
-          <p className="text-gray-600 mb-6">Add some products to your cart to proceed with checkout.</p>
+      <div className="min-h-screen bg-[#f8f3ee] flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          
+          <div className="mx-auto mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-sm">
+            <ShoppingBag className="h-8 w-8 text-amber-700" />
+          </div>
+
+          <h1 className="text-4xl font-light text-gray-950 mb-4">
+            Your cart is empty
+          </h1>
+
+          <p className="text-gray-600 mb-8 leading-relaxed">
+            Browse our handmade collection and discover products crafted for intentional self-care.
+          </p>
+
           <Link href="/products">
-            <Button>Continue Shopping</Button>
+            <Button className="bg-black hover:bg-gray-800 text-white rounded-full px-8 py-6">
+              Continue Shopping
+            </Button>
           </Link>
         </div>
       </div>
@@ -41,184 +73,227 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f3ee]">
+      
       {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/products" className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+      <div className="border-b border-[#eadfd4] bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-950 transition-colors"
+          >
             <ArrowLeft className="h-4 w-4" />
             Continue Shopping
           </Link>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+      {/* Main */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        
+        <div className="mb-10">
+          <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
+            Secure Checkout
+          </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Checkout Form */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <CreditCard className="h-5 w-5" />
-                  Payment Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmitOrder} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        First Name
-                      </label>
-                      <Input required placeholder="John" />
+          <h1 className="text-5xl font-light text-gray-950">
+            Complete Your Order
+          </h1>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10">
+          
+          {/* Form */}
+          <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
+            <CardContent className="p-8 md:p-10">
+              
+              <form
+                onSubmit={handleSubmitOrder}
+                className="space-y-8"
+              >
+                
+                {/* Contact */}
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-950 mb-5">
+                    Contact Information
+                  </h2>
+
+                  <div className="space-y-5">
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <Input
+                        required
+                        placeholder="First Name"
+                        className="h-14 rounded-2xl border-[#d8c7b6]"
+                      />
+
+                      <Input
+                        required
+                        placeholder="Last Name"
+                        className="h-14 rounded-2xl border-[#d8c7b6]"
+                      />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Last Name
-                      </label>
-                      <Input required placeholder="Doe" />
+
+                    <Input
+                      type="email"
+                      required
+                      placeholder="Email Address"
+                      className="h-14 rounded-2xl border-[#d8c7b6]"
+                    />
+                  </div>
+                </div>
+
+                {/* Shipping */}
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-950 mb-5">
+                    Shipping Address
+                  </h2>
+
+                  <div className="space-y-5">
+                    
+                    <Input
+                      required
+                      placeholder="Street Address"
+                      className="h-14 rounded-2xl border-[#d8c7b6]"
+                    />
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                      
+                      <Input
+                        required
+                        placeholder="City"
+                        className="h-14 rounded-2xl border-[#d8c7b6]"
+                      />
+
+                      <Input
+                        required
+                        placeholder="State"
+                        className="h-14 rounded-2xl border-[#d8c7b6]"
+                      />
+
+                      <Input
+                        required
+                        placeholder="ZIP"
+                        className="h-14 rounded-2xl border-[#d8c7b6]"
+                      />
                     </div>
                   </div>
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
-                    <Input type="email" required placeholder="john@example.com" />
-                  </div>
+                {/* Demo Notice */}
+                <div className="rounded-3xl bg-[#f8f3ee] p-6 border border-[#eadfd4]">
+                  <div className="flex items-start gap-4">
+                    <ShieldCheck className="h-6 w-6 text-amber-700 mt-1" />
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Address
-                    </label>
-                    <Input required placeholder="123 Main Street" />
-                  </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-950 mb-2">
+                        Demo Checkout
+                      </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        City
-                      </label>
-                      <Input required placeholder="Cincinnati" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        State
-                      </label>
-                      <Input required placeholder="OH" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        ZIP Code
-                      </label>
-                      <Input required placeholder="45201" />
+                      <p className="text-gray-600 leading-relaxed">
+                        Stripe payment integration will be connected before launch.
+                        This checkout is currently for design and testing purposes.
+                      </p>
                     </div>
                   </div>
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Card Number
-                    </label>
-                    <Input required placeholder="1234 5678 9012 3456" />
-                  </div>
+                {/* Submit */}
+                <Button
+                  type="submit"
+                  disabled={isProcessing}
+                  className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-7 text-lg font-semibold"
+                >
+                  {isProcessing
+                    ? "Processing..."
+                    : `Complete Order • $${finalTotal.toFixed(2)}`}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Expiry Date
-                      </label>
-                      <Input required placeholder="MM/YY" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        CVC
-                      </label>
-                      <Input required placeholder="123" />
-                    </div>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-amber-700 hover:bg-amber-800 py-6 text-lg"
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? "Processing..." : `Complete Order - $${totalPrice.toFixed(2)}`}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            {/* Security Features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <Shield className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <div className="text-sm font-medium">Secure Checkout</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <Truck className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-sm font-medium">Free Shipping</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <CreditCard className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                <div className="text-sm font-medium">Safe Payment</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Order Summary */}
+          {/* Summary */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
+            <Card className="border-0 rounded-[2rem] shadow-sm bg-white sticky top-28">
+              <CardContent className="p-8">
+                
+                <h2 className="text-2xl font-semibold text-gray-950 mb-8">
+                  Order Summary
+                </h2>
+
+                <div className="space-y-5">
+                  
                   {items.map((item) => (
-                    <div key={item.product.id} className="flex gap-3">
-                      <div className="relative w-16 h-16 flex-shrink-0">
+                    <div
+                      key={item.product.id}
+                      className="flex gap-4"
+                    >
+                      
+                      <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-[#eee4da] flex-shrink-0">
                         <Image
                           src={item.product.image}
                           alt={item.product.name}
                           fill
-                          className="object-cover rounded"
+                          className="object-cover"
                         />
                       </div>
+
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-gray-900 line-clamp-2">
+                        
+                        <h3 className="font-medium text-gray-950 line-clamp-2 mb-2">
                           {item.product.name}
                         </h3>
+
                         <div className="flex items-center justify-between">
-                          <Badge variant="secondary">{item.quantity}x</Badge>
-                          <span className="font-semibold text-amber-700">
-                            ${(item.product.price * item.quantity).toFixed(2)}
+                          
+                          <Badge
+                            variant="secondary"
+                            className="rounded-full"
+                          >
+                            Qty {item.quantity}
+                          </Badge>
+
+                          <span className="font-semibold text-amber-800">
+                            $
+                            {(
+                              item.product.price *
+                              item.quantity
+                            ).toFixed(2)}
                           </span>
                         </div>
                       </div>
                     </div>
                   ))}
 
-                  <div className="border-t pt-4 space-y-2">
-                    <div className="flex justify-between">
+                  {/* Totals */}
+                  <div className="border-t border-[#eadfd4] pt-6 space-y-4">
+                    
+                    <div className="flex justify-between text-gray-700">
                       <span>Subtotal</span>
                       <span>${totalPrice.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between">
+
+                    <div className="flex justify-between text-gray-700">
+                      <span>Estimated Tax</span>
+                      <span>${tax.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex justify-between text-gray-700">
                       <span>Shipping</span>
-                      <span className="text-green-600">Free</span>
+                      <span className="text-amber-700">
+                        Free
+                      </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Tax</span>
-                      <span>${(totalPrice * 0.08).toFixed(2)}</span>
-                    </div>
-                    <div className="border-t pt-2">
-                      <div className="flex justify-between text-lg font-semibold">
-                        <span>Total</span>
-                        <span className="text-amber-700">
-                          ${(totalPrice * 1.08).toFixed(2)}
-                        </span>
-                      </div>
+
+                    <div className="border-t border-[#eadfd4] pt-4 flex justify-between items-center">
+                      <span className="text-xl font-semibold text-gray-950">
+                        Total
+                      </span>
+
+                      <span className="text-3xl font-semibold text-amber-800">
+                        ${finalTotal.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 </div>

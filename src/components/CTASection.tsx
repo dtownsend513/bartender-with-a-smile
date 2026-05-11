@@ -1,63 +1,83 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 export default function CTASection() {
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background with product imagery */}
+    <section className="relative py-28 overflow-hidden">
+      
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://nourishsavannah.com/cdn/shop/files/Nourish-8951.jpg?v=1723563756&width=1440')",
+          backgroundImage:
+            "url('https://nourishsavannah.com/cdn/shop/files/Nourish-8951.jpg?v=1723563756&width=1440')",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/80 to-amber-700/70"></div>
+        <div className="absolute inset-0 bg-black/55"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-        <h2 className="text-4xl md:text-6xl font-bold mb-6">
-          Shop with Confidence!
-        </h2>
-
-        <p className="text-xl md:text-2xl mb-8 font-semibold">
-          Large Selection. Premium Quality. Amazing Prices.
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        
+        <p className="uppercase tracking-[0.3em] text-sm text-amber-200 font-semibold mb-5">
+          Luxury Self-Care Experience
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🌿</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">100% Natural</h3>
-            <p className="text-white/90">Plant-based ingredients you can trust</p>
+        <h2 className="text-5xl md:text-7xl font-light leading-tight mb-8">
+          Handmade Beauty
+          <br />
+          Crafted With Care
+        </h2>
+
+        <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-14">
+          Explore thoughtfully crafted bath and body essentials designed
+          to nourish your skin, elevate your routine, and bring a touch
+          of luxury into everyday self-care.
+        </p>
+
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+          
+          <div className="backdrop-blur-sm bg-white/10 border border-white/10 rounded-3xl p-8">
+            <h3 className="text-xl font-semibold mb-3 text-amber-200">
+              Plant-Based
+            </h3>
+
+            <p className="text-gray-200 leading-relaxed">
+              Carefully selected ingredients inspired by natural skincare traditions.
+            </p>
           </div>
 
-          <div className="text-center">
-            <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🤲</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">Handmade</h3>
-            <p className="text-white/90">Crafted with care in small batches</p>
+          <div className="backdrop-blur-sm bg-white/10 border border-white/10 rounded-3xl p-8">
+            <h3 className="text-xl font-semibold mb-3 text-amber-200">
+              Handmade
+            </h3>
+
+            <p className="text-gray-200 leading-relaxed">
+              Crafted in small batches with attention to quality, texture, and care.
+            </p>
           </div>
 
-          <div className="text-center">
-            <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">💚</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">Eco-Friendly</h3>
-            <p className="text-white/90">Sustainable packaging and practices</p>
+          <div className="backdrop-blur-sm bg-white/10 border border-white/10 rounded-3xl p-8">
+            <h3 className="text-xl font-semibold mb-3 text-amber-200">
+              Self-Care Focused
+            </h3>
+
+            <p className="text-gray-200 leading-relaxed">
+              Products created to make everyday routines feel relaxing and intentional.
+            </p>
           </div>
         </div>
 
+        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          
           <Link href="/products">
             <Button
               size="lg"
-              className="bg-white text-amber-900 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
+              className="bg-amber-200 hover:bg-amber-300 text-black px-10 py-6 text-lg rounded-full font-semibold transition-all duration-300"
             >
-              Shop All Products
+              Shop Collection
             </Button>
           </Link>
 
@@ -65,19 +85,11 @@ export default function CTASection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-amber-900 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300"
+              className="border-white text-white hover:bg-white hover:text-black px-10 py-6 text-lg rounded-full transition-all duration-300"
             >
-              Learn Our Story
+              Learn More
             </Button>
           </Link>
-        </div>
-
-        {/* Bottom section with location info */}
-        <div className="mt-16 pt-8 border-t border-white/20">
-          <p className="text-white/90 mb-2">Located in Cincinnati, Ohio</p>
-          <p className="text-white/80 text-sm">
-            Monday - Friday: 9:00am - 5:00pm | Saturday - Sunday: Closed
-          </p>
         </div>
       </div>
     </section>
