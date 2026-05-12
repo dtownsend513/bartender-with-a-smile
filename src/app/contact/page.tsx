@@ -35,12 +35,20 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      alert(
-        "Email integration will be connected before launch."
-      );
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      alert("Message sent successfully!");
 
       setFormData({
         name: "",
@@ -48,7 +56,14 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
-    }, 1200);
+
+    } catch (error) {
+      console.error(error);
+
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -64,11 +79,8 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[#f8f3ee]">
-      
-      {/* Hero */}
       <section className="py-24 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
           <p className="uppercase tracking-[0.3em] text-sm text-amber-700 font-semibold mb-5">
             Contact Komposition Beauty
           </p>
@@ -86,16 +98,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Main Section */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10">
-            
-            {/* Contact Form */}
             <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
               <CardContent className="p-8 md:p-12">
-                
                 <div className="mb-10">
                   <h2 className="text-3xl font-light text-gray-950 mb-4">
                     Send A Message
@@ -110,9 +117,7 @@ export default function ContactPage() {
                   onSubmit={handleSubmit}
                   className="space-y-6"
                 >
-                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    
                     <Input
                       type="text"
                       name="name"
@@ -167,13 +172,9 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            {/* Sidebar */}
             <div className="space-y-6">
-              
-              {/* Location */}
               <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
                 <CardContent className="p-8">
-                  
                   <div className="flex items-start gap-4">
                     <MapPin className="h-6 w-6 text-amber-700 mt-1" />
 
@@ -190,10 +191,8 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              {/* Email */}
               <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
                 <CardContent className="p-8">
-                  
                   <div className="flex items-start gap-4">
                     <Mail className="h-6 w-6 text-amber-700 mt-1" />
 
@@ -203,23 +202,20 @@ export default function ContactPage() {
                       </h3>
 
                       <p className="text-gray-600 leading-relaxed">
-                        Email integration will be connected before launch.
+                        For product questions or order inquiries, use the contact form and our team will respond as soon as possible.
                       </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Socials */}
               <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
                 <CardContent className="p-8">
-                  
                   <h3 className="text-xl font-semibold text-gray-950 mb-6">
                     Follow Along
                   </h3>
 
                   <div className="space-y-4">
-                    
                     <a
                       href="https://www.instagram.com/kompbeau/"
                       target="_blank"
@@ -259,16 +255,13 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              {/* FAQ */}
               <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
                 <CardContent className="p-8">
-                  
                   <h3 className="text-xl font-semibold text-gray-950 mb-6">
                     Frequently Asked
                   </h3>
 
                   <div className="space-y-6">
-                    
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2">
                         Do you ship nationwide?
