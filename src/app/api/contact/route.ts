@@ -10,25 +10,25 @@ export async function POST(req: Request) {
     const { name, email, message } = body;
 
     const data = await resend.emails.send({
-      from: "website@thekomposition.com",
+      from: "Komposition <website@thekomposition.com>",
       to: "kompbeauty@gmail.com",
       subject: `New Contact Form Submission from ${name}`,
+      replyTo: email,
       html: `
         <h2>New Website Inquiry</h2>
 
         <p><strong>Name:</strong> ${name}</p>
-
         <p><strong>Email:</strong> ${email}</p>
 
         <p><strong>Message:</strong></p>
-
         <p>${message}</p>
       `,
     });
 
     return NextResponse.json(data);
-
   } catch (error) {
+    console.error("Resend error:", error);
+
     return NextResponse.json(
       { error: "Email failed to send" },
       { status: 500 }
