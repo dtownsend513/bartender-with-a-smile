@@ -1,195 +1,177 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#f8f3ee]">
-      
+    <main className="min-h-screen bg-[#0f0b08] text-white">
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1974&auto=format&fit=crop"
-            alt="Luxury skincare"
-            fill
-            priority
-            className="object-cover"
-          />
+      <section className="relative overflow-hidden bg-black">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-35"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1800&q=90')",
+          }}
+        />
 
-          <div className="absolute inset-0 bg-black/50"></div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/20" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center text-white">
-          
-          <p className="uppercase tracking-[0.3em] text-sm text-amber-200 font-semibold mb-5">
-            About Komposition Beauty
-          </p>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 py-28">
+          <div className="max-w-3xl">
+            <p className="uppercase tracking-[0.35em] text-sm text-[#ffd700] font-semibold mb-5">
+              Our Story
+            </p>
 
-          <h1 className="text-5xl md:text-7xl font-light leading-tight mb-8">
-            Handmade Self-Care
-            <br />
-            Inspired By Nature
-          </h1>
+            <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8">
+              Meet
+              <br />
+              Ta’Marsh Pope
+            </h1>
 
-          <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-            Thoughtfully crafted bath and body products designed to bring beauty,
-            comfort, and intentional self-care into your everyday routine.
-          </p>
+            <p className="text-xl text-white/80 leading-relaxed">
+              Founder of Bartender With A Smile, bringing professional mobile
+              bartending, warm hospitality, and unforgettable drink experiences
+              to events throughout Cincinnati.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Story */}
+      <section className="py-24 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Content */}
-            <div>
-              <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
-                Our Story
+          {/* Image */}
+          <div className="relative">
+            <div className="absolute -inset-4 border border-[#ffd700]/30 rounded-[2rem]" />
+
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10">
+              <Image
+                src="/images/tmbartender.png"
+                alt="Ta'Marsh Pope"
+                width={700}
+                height={900}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div>
+            <p className="uppercase tracking-[0.35em] text-sm text-[#ffd700] font-semibold mb-5">
+              Founder & Bartender
+            </p>
+
+            <h2 className="text-5xl md:text-6xl font-light leading-tight mb-10">
+              A personal touch behind every pour.
+            </h2>
+
+            <div className="space-y-7 text-lg md:text-xl text-white/75 leading-relaxed">
+              <p>
+                Ta’Marsh Pope is the founder and owner of Bartender With A Smile,
+                a professional bartending service based in Cincinnati, Ohio.
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-light text-gray-950 mb-8 leading-tight">
-                Beauty That Feels
-                <br />
-                Personal
-              </h2>
+              <p>
+                With years of experience in the industry, Ta’Marsh is known for
+                creating delicious, unique drinks tailored to each client’s taste,
+                event style, and guest experience.
+              </p>
 
-              <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
-                <p>
-                  Komposition Beauty was created with a simple idea — self-care
-                  should feel luxurious, intentional, and inspired by ingredients
-                  that nourish both skin and confidence.
-                </p>
+              <p>
+                Born and raised in Cincinnati, Ta’Marsh developed a passion for
+                mixology early on, experimenting with ingredients, flavors, and
+                techniques to perfect her craft.
+              </p>
 
-                <p>
-                  Our handcrafted bath and body products are made in small batches
-                  using thoughtfully selected ingredients, rich textures, and
-                  beautiful scents designed to elevate your daily routine.
-                </p>
+              <p>
+                As the owner of Bartender With A Smile, she brings a personal
+                touch to every event. Her warm personality and welcoming energy
+                help create an atmosphere where guests feel comfortable,
+                celebrated, and taken care of.
+              </p>
 
-                <p>
-                  We believe beauty products should feel honest, comforting, and
-                  made with care — not overly complicated or mass produced.
-                </p>
-              </div>
+              <p>
+                Beyond bartending, Ta’Marsh is passionate about helping clients
+                create memorable event experiences. She takes time to understand
+                each client’s needs and is committed to delivering service that
+                feels polished, personal, and professional.
+              </p>
             </div>
 
-            {/* Image */}
-            <div className="relative">
-              <div className="relative h-[550px] rounded-[2rem] overflow-hidden shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1556760544-74068565f05c?ixlib=rb-4.0.3&w=1200"
-                  alt="Natural skincare ingredients"
-                  fill
-                  className="object-cover"
-                />
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <a
+                href="/contact"
+                className="bg-[#ffd700] hover:bg-[#f5c400] text-black px-8 py-4 rounded-full font-bold text-center transition"
+              >
+                Book Your Event
+              </a>
 
-                <div className="absolute inset-0 bg-black/10"></div>
-              </div>
+              <a
+                href="tel:5133444446"
+                className="border border-white/30 bg-white/5 hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-center transition"
+              >
+                Call 513-344-4446
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+      <section className="bg-black py-24 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
-              What We Value
+            <p className="uppercase tracking-[0.3em] text-sm text-[#ffd700] font-semibold mb-5">
+              What Makes Us Different
             </p>
 
-            <h2 className="text-4xl md:text-5xl font-light text-gray-950">
-              Crafted With Care
+            <h2 className="text-4xl md:text-6xl font-light">
+              More Than Drinks
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <Card className="rounded-3xl border-0 shadow-sm bg-white">
-              <CardContent className="p-10 text-center">
-                
-                <div className="w-16 h-16 rounded-full bg-amber-100 mx-auto mb-6 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full bg-amber-700"></div>
-                </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-[#18120d] border border-white/10 rounded-[2rem] p-8">
+              <div className="text-[#ffd700] text-4xl mb-6">✦</div>
 
-                <h3 className="text-2xl font-semibold text-gray-950 mb-4">
-                  Plant-Based
-                </h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                Professional Service
+              </h3>
 
-                <p className="text-gray-600 leading-relaxed">
-                  Ingredient-conscious bath and body products inspired by natural skincare traditions.
-                </p>
-              </CardContent>
-            </Card>
+              <p className="text-white/65 leading-relaxed">
+                Reliable bartending support designed to keep your event smooth,
+                organized, and enjoyable.
+              </p>
+            </div>
 
-            <Card className="rounded-3xl border-0 shadow-sm bg-white">
-              <CardContent className="p-10 text-center">
-                
-                <div className="w-16 h-16 rounded-full bg-amber-100 mx-auto mb-6 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full bg-amber-700"></div>
-                </div>
+            <div className="bg-[#18120d] border border-white/10 rounded-[2rem] p-8">
+              <div className="text-[#ffd700] text-4xl mb-6">✦</div>
 
-                <h3 className="text-2xl font-semibold text-gray-950 mb-4">
-                  Handmade
-                </h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                Custom Drink Experience
+              </h3>
 
-                <p className="text-gray-600 leading-relaxed">
-                  Crafted in small batches with attention to quality, texture, and detail.
-                </p>
-              </CardContent>
-            </Card>
+              <p className="text-white/65 leading-relaxed">
+                Signature drinks and beverage service tailored to your event,
+                guests, and celebration style.
+              </p>
+            </div>
 
-            <Card className="rounded-3xl border-0 shadow-sm bg-white">
-              <CardContent className="p-10 text-center">
-                
-                <div className="w-16 h-16 rounded-full bg-amber-100 mx-auto mb-6 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full bg-amber-700"></div>
-                </div>
+            <div className="bg-[#18120d] border border-white/10 rounded-[2rem] p-8">
+              <div className="text-[#ffd700] text-4xl mb-6">✦</div>
 
-                <h3 className="text-2xl font-semibold text-gray-950 mb-4">
-                  Self-Care Focused
-                </h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                Welcoming Energy
+              </h3>
 
-                <p className="text-gray-600 leading-relaxed">
-                  Products designed to make daily routines feel relaxing and intentional.
-                </p>
-              </CardContent>
-            </Card>
+              <p className="text-white/65 leading-relaxed">
+                A warm, friendly presence that helps guests feel comfortable,
+                served, and celebrated.
+              </p>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Closing Section */}
-      <section className="pb-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <div className="bg-white rounded-[2rem] shadow-sm p-10 md:p-16">
-            
-            <p className="uppercase tracking-[0.28em] text-sm text-amber-700 font-semibold mb-4">
-              Our Commitment
-            </p>
-
-            <h2 className="text-4xl md:text-5xl font-light text-gray-950 mb-8">
-              Luxury In Everyday Rituals
-            </h2>
-
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              At Komposition Beauty, we believe self-care should feel meaningful,
-              comforting, and beautifully simple.
-            </p>
-
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Every product is created with the goal of helping you slow down,
-              care for your skin, and enjoy moments of intentional beauty in your routine.
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

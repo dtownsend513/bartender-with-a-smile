@@ -1,74 +1,63 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-      
-      {/* Background Image */}
+    <section className="relative min-h-[88vh] bg-black text-white overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+        className="absolute inset-0 bg-cover bg-center opacity-70"
         style={{
           backgroundImage:
-            "url('https://dam.hollandandbarrettimages.co.uk/default/_raw/fe865779-7b6f-46ef-ba8c-8ef8b3ca1b14/hair-masks-hero.png')",
+            "url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=2200&q=95')",
         }}
-      >
-        {/* Luxury Overlay */}
-        <div className="absolute inset-0 bg-black/45"></div>
+      />
 
-        {/* Soft Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#080604] via-transparent to-black/20" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        
-        {/* Small Header */}
-        <p className="uppercase tracking-[0.3em] text-amber-200 text-sm md:text-base mb-5 font-medium">
-          Handmade Bath & Body Essentials
-        </p>
+      <div className="relative z-10 min-h-[88vh] max-w-7xl mx-auto px-6 lg:px-16 flex items-center">
+        <div className="max-w-3xl">
+          <p className="uppercase tracking-[0.35em] text-xs md:text-sm text-[#ffd700] font-bold mb-6">
+            Cincinnati Mobile Bartending
+          </p>
 
-        {/* Main Heading */}
-        <h1 className="text-5xl md:text-7xl font-light text-white leading-tight mb-6">
-          Self Care
-          <br />
-          <span className="font-semibold text-amber-200">
-            Made Beautiful
-          </span>
-        </h1>
+          <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 drop-shadow-[0_8px_30px_rgba(0,0,0,0.85)]">
+            Professional
+            <br />
+            Bartending
+            <br />
+            With A Smile
+          </h1>
 
-        {/* Description */}
-        <p className="text-lg md:text-2xl text-gray-200 leading-relaxed max-w-3xl mx-auto mb-10">
-          Luxurious handcrafted soaps, oils, scrubs, and beauty products
-          created to nourish your skin and elevate your daily routine.
-        </p>
+          <p className="text-lg md:text-2xl text-white/85 leading-relaxed max-w-2xl mb-10">
+            Mobile bartending for weddings, private parties, corporate events,
+            and celebrations throughout Cincinnati and surrounding areas.
+          </p>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          
-          <Link href="/products">
-            <Button
-              size="lg"
-              className="bg-amber-200 hover:bg-amber-300 text-black px-10 py-6 text-lg rounded-full font-semibold transition-all duration-300"
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <a
+              href="/contact"
+              className="bg-[#ffd700] hover:bg-[#f5c400] text-black px-10 py-5 rounded-full font-black text-center transition shadow-[0_0_40px_rgba(255,215,0,0.25)]"
             >
-              Shop Collection
-            </Button>
-          </Link>
+              Book Your Event
+            </a>
 
-          <Link href="/about">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border border-white/80 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black px-10 py-6 text-lg rounded-full transition-all duration-300"
+            <a
+              href="/bar-services"
+              className="border border-white/40 bg-black/30 backdrop-blur hover:bg-white hover:text-black px-10 py-5 rounded-full font-black text-center transition"
             >
-              Learn More
-            </Button>
-          </Link>
+              View Packages
+            </a>
+          </div>
+
+          <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-white/70">
+            <span>Licensed & Insured</span>
+            <span className="text-[#ffd700]">•</span>
+            <span>Weddings</span>
+            <span className="text-[#ffd700]">•</span>
+            <span>Private Events</span>
+            <span className="text-[#ffd700]">•</span>
+            <span>5-Star Reviews</span>
+          </div>
         </div>
       </div>
-
-      {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
     </section>
   );
 }

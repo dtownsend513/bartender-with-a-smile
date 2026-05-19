@@ -2,38 +2,22 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
-
-import {
-  MapPin,
-  Mail,
-  Instagram,
-  Facebook,
-  Youtube,
-} from "lucide-react";
-
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [loading, setLoading] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setIsSubmitting(true);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    };
 
     try {
       const response = await fetch("/api/contact", {
@@ -41,263 +25,165 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to send message");
+      if (response.ok) {
+        alert("Message sent successfully!");
+        e.currentTarget.reset();
+      } else {
+        alert("Failed to send message.");
       }
-
-      alert("Message sent successfully!");
-
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-
     } catch (error) {
-      console.error(error);
-
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      alert("Something went wrong.");
     }
-  };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    setLoading(false);
+  }
 
   return (
-    <div className="min-h-screen bg-[#f8f3ee]">
-      <section className="py-24 text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="uppercase tracking-[0.3em] text-sm text-amber-700 font-semibold mb-5">
-            Contact Komposition Beauty
-          </p>
+    <main className="min-h-screen bg-[#0f0b08] text-white">
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20">
+          
+          {/* Left Side */}
+          <div>
+            <p className="uppercase tracking-[0.3em] text-sm text-amber-400 font-semibold mb-5">
+              Contact
+            </p>
 
-          <h1 className="text-5xl md:text-7xl font-light text-gray-950 leading-tight mb-8">
-            We’d Love
-            <br />
-            To Hear From You
-          </h1>
+            <h1 className="text-5xl md:text-7xl font-light mb-8">
+              Get In Touch
+            </h1>
 
-          <p className="text-lg md:text-2xl text-gray-600 leading-relaxed">
-            Questions, product inquiries, collaborations, or custom requests —
-            connect with us anytime.
-          </p>
-        </div>
-      </section>
+            <p className="text-white/70 text-xl leading-relaxed mb-12">
+              For bookings, weddings, private events, or general inquiries,
+              please call or send a message using the form.
+            </p>
 
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10">
-            <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
-              <CardContent className="p-8 md:p-12">
-                <div className="mb-10">
-                  <h2 className="text-3xl font-light text-gray-950 mb-4">
-                    Send A Message
-                  </h2>
+            <div className="space-y-8 text-lg">
+              <div>
+                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
+                  Phone
+                </p>
 
-                  <p className="text-gray-600 leading-relaxed">
-                    We’ll respond as soon as possible regarding your inquiry.
-                  </p>
-                </div>
-
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-6"
+                <a
+                  href="tel:5133444446"
+                  className="hover:text-amber-400 transition"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <Input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your Name"
-                      className="h-14 rounded-2xl border-[#d8c7b6]"
-                    />
+                  513-344-4446
+                </a>
+              </div>
 
-                    <Input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="Email Address"
-                      className="h-14 rounded-2xl border-[#d8c7b6]"
-                    />
-                  </div>
+              <div>
+                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
+                  Email
+                </p>
 
-                  <Input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    placeholder="Subject"
-                    className="h-14 rounded-2xl border-[#d8c7b6]"
-                  />
+                <a
+                  href="mailto:bartenderwithasmile@myyahoo.com"
+                  className="hover:text-amber-400 transition"
+                >
+                  bartenderwithasmile@myyahoo.com
+                </a>
+              </div>
 
-                  <textarea
-                    name="message"
-                    rows={7}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Tell us about your inquiry..."
-                    className="w-full rounded-[1.5rem] border border-[#d8c7b6] bg-white px-5 py-4 text-gray-900 outline-none transition-all focus:border-amber-700 focus:ring-2 focus:ring-amber-100 resize-none"
-                  />
+              <div>
+                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
+                  Location
+                </p>
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-7 text-lg font-semibold"
-                  >
-                    {isSubmitting
-                      ? "Sending..."
-                      : "Send Message"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            <div className="space-y-6">
-              <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4">
-                    <MapPin className="h-6 w-6 text-amber-700 mt-1" />
-
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-950 mb-3">
-                        Based In Cincinnati
-                      </h3>
-
-                      <p className="text-gray-600 leading-relaxed">
-                        Handmade bath and body products crafted with care and shipped across the United States.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4">
-                    <Mail className="h-6 w-6 text-amber-700 mt-1" />
-
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-950 mb-3">
-                        Customer Support
-                      </h3>
-
-                      <p className="text-gray-600 leading-relaxed">
-                        For product questions or order inquiries, use the contact form and our team will respond as soon as possible.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-950 mb-6">
-                    Follow Along
-                  </h3>
-
-                  <div className="space-y-4">
-                    <a
-                      href="https://www.instagram.com/kompbeau/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 rounded-2xl border border-[#eadfd4] px-5 py-4 transition-all hover:bg-[#f8f3ee]"
-                    >
-                      <Instagram className="h-5 w-5 text-amber-700" />
-                      <span className="text-gray-800 font-medium">
-                        Instagram
-                      </span>
-                    </a>
-
-                    <a
-                      href="https://www.facebook.com/profile.php?id=61554421294812"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 rounded-2xl border border-[#eadfd4] px-5 py-4 transition-all hover:bg-[#f8f3ee]"
-                    >
-                      <Facebook className="h-5 w-5 text-amber-700" />
-                      <span className="text-gray-800 font-medium">
-                        Facebook
-                      </span>
-                    </a>
-
-                    <a
-                      href="https://www.youtube.com/@The_Komposition"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 rounded-2xl border border-[#eadfd4] px-5 py-4 transition-all hover:bg-[#f8f3ee]"
-                    >
-                      <Youtube className="h-5 w-5 text-amber-700" />
-                      <span className="text-gray-800 font-medium">
-                        YouTube
-                      </span>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 rounded-[2rem] shadow-sm bg-white">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-950 mb-6">
-                    Frequently Asked
-                  </h3>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        Do you ship nationwide?
-                      </h4>
-
-                      <p className="text-gray-600 leading-relaxed">
-                        Yes — we ship our products throughout the United States.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        Are your products handmade?
-                      </h4>
-
-                      <p className="text-gray-600 leading-relaxed">
-                        Yes — our bath and body products are crafted in small batches.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        Do you accept custom requests?
-                      </h4>
-
-                      <p className="text-gray-600 leading-relaxed">
-                        Contact us directly to discuss custom product inquiries.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <p>Cincinnati, Ohio 45213</p>
+              </div>
             </div>
+
+            {/* The Knot CTA */}
+            <div className="mt-14">
+              <a
+                href="https://www.theknot.com/marketplace/bartender-with-a-smile-cincinnati-oh-2087539"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-4 bg-white text-black px-8 py-5 rounded-2xl hover:scale-105 transition"
+              >
+                <span className="font-semibold">
+                  Read Reviews On The Knot
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right Side */}
+          <div className="bg-[#18120d] border border-white/10 rounded-3xl p-8 md:p-10">
+            <h2 className="text-3xl font-semibold mb-8">
+              Contact Us
+            </h2>
+
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              <div>
+                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
+                  Your Name
+                </label>
+
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
+                  Your Email
+                </label>
+
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
+                  Phone Number
+                </label>
+
+                <input
+                  type="text"
+                  name="phone"
+                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
+                  Message
+                </label>
+
+                <textarea
+                  name="message"
+                  rows={6}
+                  required
+                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-amber-400 hover:bg-amber-300 text-black py-5 rounded-2xl font-semibold transition"
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

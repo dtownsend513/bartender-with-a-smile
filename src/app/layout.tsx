@@ -1,19 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {
+  Inter,
+  Playfair_Display,
+} from "next/font/google";
 
 import "./globals.css";
 
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
 
 const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
-  title: "Komposition Beauty - Handmade Bath & Body Products",
+  title: "Bartender With A Smile | Cincinnati Mobile Bartending",
   description:
-    "Discover handmade, plant-based bath and body products crafted for nourishing self-care routines.",
+    "Professional mobile bartending services for weddings, private parties, corporate events, and celebrations throughout Cincinnati.",
 };
 
 export default function RootLayout({
@@ -24,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased bg-[#f8f3ee] text-gray-900`}
+        className={`${inter.variable} ${playfair.variable} antialiased bg-[#0f0b08] text-white`}
       >
         <CartProvider>
           <Navigation />
@@ -32,6 +42,8 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
+
+          <Footer />
         </CartProvider>
       </body>
     </html>
