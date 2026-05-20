@@ -1,21 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setLoading(true);
+    setStatusMessage("");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      eventType: formData.get("eventType"),
+      eventDate: formData.get("eventDate"),
+      guestCount: formData.get("guestCount"),
       message: formData.get("message"),
     };
 
@@ -29,158 +36,227 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        alert("Message sent successfully!");
-        e.currentTarget.reset();
+        setStatusMessage("Thank you! Your request has been sent.");
+        form.reset();
       } else {
-        alert("Failed to send message.");
+        setStatusMessage("Message failed to send. Please call 513-344-4446.");
       }
     } catch (error) {
-      alert("Something went wrong.");
+      setStatusMessage("Something went wrong. Please call 513-344-4446.");
     }
 
     setLoading(false);
   }
 
   return (
-    <main className="min-h-screen bg-[#0f0b08] text-white">
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20">
-          
-          {/* Left Side */}
+    <main className="min-h-screen overflow-hidden bg-[#080604] text-white">
+      <section className="relative px-6 py-24 md:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,158,11,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.06),transparent_30%)]" />
+
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
-            <p className="uppercase tracking-[0.3em] text-sm text-amber-400 font-semibold mb-5">
-              Contact
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">
+              Request Availability
             </p>
 
-            <h1 className="text-5xl md:text-7xl font-light mb-8">
-              Get In Touch
+            <h1 className="mb-8 text-5xl font-light leading-tight md:text-7xl">
+              Let’s Talk About
+              <br />
+              Your Event
             </h1>
 
-            <p className="text-white/70 text-xl leading-relaxed mb-12">
-              For bookings, weddings, private events, or general inquiries,
-              please call or send a message using the form.
+            <p className="mb-10 max-w-xl text-lg leading-relaxed text-white/70">
+              Tell us the date, location, guest count, and the type of
+              celebration you are planning. Bartender With A Smile will follow
+              up with availability and next steps.
             </p>
 
-            <div className="space-y-8 text-lg">
-              <div>
-                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
-                  Phone
+            <div className="grid gap-5">
+              <a
+                href="tel:5133444446"
+                className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition hover:border-amber-300/60 hover:bg-white/[0.07]"
+              >
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
+                  Call
                 </p>
-
-                <a
-                  href="tel:5133444446"
-                  className="hover:text-amber-400 transition"
-                >
+                <p className="text-xl font-semibold transition group-hover:text-amber-300">
                   513-344-4446
-                </a>
-              </div>
+                </p>
+              </a>
 
-              <div>
-                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
+              <a
+                href="mailto:bartenderwithasmile@myyahoo.com"
+                className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition hover:border-amber-300/60 hover:bg-white/[0.07]"
+              >
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
                   Email
                 </p>
-
-                <a
-                  href="mailto:bartenderwithasmile@myyahoo.com"
-                  className="hover:text-amber-400 transition"
-                >
+                <p className="break-all text-xl font-semibold transition group-hover:text-amber-300">
                   bartenderwithasmile@myyahoo.com
-                </a>
-              </div>
-
-              <div>
-                <p className="text-amber-400 mb-2 uppercase text-sm tracking-[0.2em]">
-                  Location
                 </p>
+              </a>
 
-                <p>Cincinnati, Ohio 45213</p>
+              <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
+                  Serving
+                </p>
+                <p className="text-xl font-semibold">
+                  Cincinnati, Ohio 45213
+                </p>
               </div>
             </div>
 
-            {/* The Knot CTA */}
-            <div className="mt-14">
-              <a
+            <div className="mt-8 rounded-3xl border border-amber-300/20 bg-amber-300/[0.07] p-6">
+              <p className="text-sm leading-relaxed text-white/75">
+                Certificate of Insurance (COI) provided upon request. Perfect
+                for venues, corporate events, weddings, and private
+                celebrations that require vendor documentation.
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <Link
                 href="https://www.theknot.com/marketplace/bartender-with-a-smile-cincinnati-oh-2087539"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-white text-black px-8 py-5 rounded-2xl hover:scale-105 transition"
+                className="inline-flex rounded-full border border-white/15 bg-white px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-105 hover:bg-amber-300"
               >
-                <span className="font-semibold">
-                  Read Reviews On The Knot
-                </span>
-              </a>
+                Read Reviews On The Knot
+              </Link>
             </div>
           </div>
 
-          {/* Right Side */}
-          <div className="bg-[#18120d] border border-white/10 rounded-3xl p-8 md:p-10">
-            <h2 className="text-3xl font-semibold mb-8">
-              Contact Us
-            </h2>
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-br from-amber-300/30 via-white/5 to-transparent blur-2xl" />
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-            >
-              <div>
-                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
-                  Your Name
-                </label>
+            <div className="relative rounded-[2rem] border border-white/10 bg-[#120d09]/90 p-6 shadow-2xl backdrop-blur-xl md:p-10">
+              <div className="mb-8">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-amber-300">
+                  Booking Form
+                </p>
 
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
-                />
+                <h2 className="text-3xl font-light md:text-4xl">
+                  Request A Quote
+                </h2>
               </div>
 
-              <div>
-                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
-                  Your Email
-                </label>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition placeholder:text-white/25 focus:border-amber-300"
+                      placeholder="Full name"
+                    />
+                  </div>
 
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
-                />
-              </div>
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition placeholder:text-white/25 focus:border-amber-300"
+                      placeholder="you@email.com"
+                    />
+                  </div>
+                </div>
 
-              <div>
-                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
-                  Phone Number
-                </label>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition placeholder:text-white/25 focus:border-amber-300"
+                      placeholder="513-000-0000"
+                    />
+                  </div>
 
-                <input
-                  type="text"
-                  name="phone"
-                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
-                />
-              </div>
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Event Type
+                    </label>
+                    <select
+                      name="eventType"
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition focus:border-amber-300"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select one
+                      </option>
+                      <option>Wedding</option>
+                      <option>Private Party</option>
+                      <option>Birthday Celebration</option>
+                      <option>Corporate Event</option>
+                      <option>Holiday Party</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
 
-              <div>
-                <label className="block text-sm uppercase tracking-[0.2em] text-white/60 mb-3">
-                  Message
-                </label>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Event Date
+                    </label>
+                    <input
+                      type="date"
+                      name="eventDate"
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition focus:border-amber-300"
+                    />
+                  </div>
 
-                <textarea
-                  name="message"
-                  rows={6}
-                  required
-                  className="w-full bg-black border border-white/10 rounded-2xl px-5 py-4 text-white outline-none focus:border-amber-400"
-                />
-              </div>
+                  <div>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Guest Count
+                    </label>
+                    <input
+                      type="text"
+                      name="guestCount"
+                      className="w-full rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition placeholder:text-white/25 focus:border-amber-300"
+                      placeholder="Approx. number of guests"
+                    />
+                  </div>
+                </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-amber-400 hover:bg-amber-300 text-black py-5 rounded-2xl font-semibold transition"
-              >
-                {loading ? "Sending..." : "Send Message"}
-              </button>
-            </form>
+                <div>
+                  <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
+                    Event Details
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={6}
+                    required
+                    className="w-full resize-none rounded-2xl border border-white/10 bg-black/45 px-5 py-4 text-white outline-none transition placeholder:text-white/25 focus:border-amber-300"
+                    placeholder="Tell us about your event, location, timing, and anything the bartender should know."
+                  />
+                </div>
+
+                {statusMessage && (
+                  <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white/75">
+                    {statusMessage}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-full bg-amber-400 px-8 py-5 text-sm font-bold uppercase tracking-[0.22em] text-black transition hover:scale-[1.02] hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {loading ? "Sending Request..." : "Send Booking Request"}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

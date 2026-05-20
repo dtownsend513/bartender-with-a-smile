@@ -1,3 +1,16 @@
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  Check,
+  Clock3,
+  GlassWater,
+  Martini,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from "lucide-react";
+
 const packages = [
   {
     name: "Package 1",
@@ -14,10 +27,8 @@ const packages = [
       "Straws",
       "Garnish: lemons, limes, and cherries",
     ],
-    note:
-      "Pour service only. Client provides liquor, mixers, ice, and juice.",
+    note: "Pour service only. Client provides liquor, mixers, ice, and juice.",
   },
-
   {
     name: "Package 2",
     price: "$625",
@@ -34,10 +45,9 @@ const packages = [
       "Straws",
       "Garnish: lemons, limes, and cherries",
     ],
-    note:
-      "Mixers, juices, and ice are available as an add-on. Pour service only.",
+    note: "Mixers, juices, and ice are available as an add-on. Pour service only.",
+    featured: true,
   },
-
   {
     name: "Package 3",
     price: "$725",
@@ -54,10 +64,8 @@ const packages = [
       "Straws",
       "Garnish: lemons, limes, and cherries",
     ],
-    note:
-      "Mixers, juices, and ice are available as an add-on. Pour service only.",
+    note: "Mixers, juices, and ice are available as an add-on. Pour service only.",
   },
-
   {
     name: "Package 4",
     price: "Call for quote",
@@ -72,16 +80,41 @@ const packages = [
       "Licensed and insured",
       "Certificate of Insurance available upon request",
     ],
-    note:
-      "Best for private parties and smaller events needing a custom setup.",
+    note: "Best for private parties and smaller events needing a custom setup.",
+  },
+];
+
+const includedItems = [
+  {
+    title: "Professional Bartenders",
+    icon: Martini,
+  },
+  {
+    title: "Bar Equipment",
+    icon: GlassWater,
+  },
+  {
+    title: "4 Hour Minimum",
+    icon: Clock3,
+  },
+  {
+    title: "Guest Count Options",
+    icon: Users,
+  },
+  {
+    title: "Licensed & Insured",
+    icon: ShieldCheck,
+  },
+  {
+    title: "COI Upon Request",
+    icon: BadgeCheck,
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-[#0f0b08] text-white overflow-hidden">
-      {/* HERO */}
-      <section className="relative min-h-[88vh] overflow-hidden bg-black flex items-center">
+    <main className="min-h-screen overflow-hidden bg-[#080604] text-white">
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-black px-6 pb-24 pt-36 lg:px-20 lg:pt-44">
         <div
           className="absolute inset-0 bg-cover bg-[center_right]"
           style={{
@@ -90,16 +123,21 @@ export default function ServicesPage() {
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0b08] via-transparent to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080604] via-transparent to-black/20" />
+        <div className="absolute left-[-10%] top-24 h-[420px] w-[420px] rounded-full bg-amber-400/10 blur-[140px]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-20 py-32">
-          <div className="max-w-2xl lg:ml-8">
-            <p className="uppercase tracking-[0.35em] text-xs md:text-sm text-[#ffd700] font-semibold mb-6">
-              Bar Services
-            </p>
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
+          <div className="max-w-3xl">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-amber-300/25 bg-amber-300/[0.06] px-5 py-3 text-amber-300 backdrop-blur-xl">
+              <Martini size={18} />
 
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl leading-[0.9] mb-8 max-w-[700px]">
+              <span className="text-xs font-bold uppercase tracking-[0.28em]">
+                Bar Services
+              </span>
+            </div>
+
+            <h1 className="hero-title mb-8 max-w-[760px] text-5xl leading-[0.9] md:text-7xl lg:text-8xl">
               Professional
               <br />
               Bartending
@@ -107,23 +145,24 @@ export default function ServicesPage() {
               Services
             </h1>
 
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-xl mb-10">
+            <p className="mb-10 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
               Skilled mobile bartending for weddings, private parties,
               celebrations, and corporate events throughout Cincinnati and
               surrounding areas.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Link
                 href="/contact"
-                className="bg-[#ffd700] hover:bg-[#f5c400] text-black px-8 py-4 rounded-full font-bold text-center transition"
+                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#ffd700] px-8 py-4 font-bold text-black transition hover:scale-105 hover:bg-[#f5c400]"
               >
                 Request A Quote
-              </a>
+                <ArrowUpRight size={18} />
+              </Link>
 
               <a
                 href="tel:5133444446"
-                className="border border-white/30 bg-black/20 backdrop-blur hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-center transition"
+                className="rounded-full border border-white/30 bg-black/20 px-8 py-4 text-center font-bold backdrop-blur transition hover:bg-white hover:text-black"
               >
                 Call 513-344-4446
               </a>
@@ -142,20 +181,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* INTRO */}
-      <section className="py-24 px-6 lg:px-16 bg-[#0f0b08]">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-14 items-center">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 min-h-[500px]">
+      <section className="relative bg-[#080604] px-6 py-24 lg:px-16">
+        <div className="absolute right-[-10%] top-16 h-[380px] w-[380px] rounded-full bg-amber-400/10 blur-[140px]" />
+
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative min-h-[500px] overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-2xl shadow-black/30">
             <img
               src="/images/fruitydrink.png"
               alt="Professional bartending drink"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="text-[#ffd700] uppercase tracking-[0.25em] text-sm font-semibold mb-3">
+            <div className="absolute inset-x-0 bottom-0 p-8">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#ffd700]">
                 Fully Licensed & Insured
               </p>
 
@@ -166,103 +206,120 @@ export default function ServicesPage() {
           </div>
 
           <div>
-            <p className="uppercase tracking-[0.3em] text-sm text-[#ffd700] font-semibold mb-5">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-[#ffd700]">
               What’s Included
             </p>
 
-            <h2 className="text-4xl md:text-6xl font-light leading-tight mb-8">
-              Everything needed for a premium bar experience.
+            <h2 className="mb-8 text-4xl font-light leading-tight md:text-6xl">
+              Everything needed for a polished bar experience.
             </h2>
 
-            <p className="text-white/70 text-xl leading-relaxed mb-8">
+            <p className="mb-8 text-lg leading-relaxed text-white/70 md:text-xl">
               Packages include professional bartending service, bar equipment,
               beverage essentials, garnishes, and customizable options for your
-              event.
+              event. Liquor is provided by the client.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                "Professional Bartenders",
-                "Bar Equipment",
-                "Cups & Napkins",
-                "Straws & Garnishes",
-                "Signature Drinks",
-                "COI Upon Request",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-[#18120d] px-5 py-4 text-[#ffd700] font-semibold"
-                >
-                  {item}
-                </div>
-              ))}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {includedItems.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-[#18120d] px-5 py-4 text-[#ffd700]"
+                  >
+                    <Icon size={20} />
+                    <span className="font-semibold">{item.title}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section className="pb-16 px-6 lg:px-16 bg-[#0f0b08]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="uppercase tracking-[0.3em] text-sm text-[#ffd700] font-semibold mb-5">
-              Packages
-            </p>
+      <section className="bg-[#080604] px-6 pb-20 lg:px-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <div>
+              <p className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-[#ffd700]">
+                Packages
+              </p>
 
-            <h2 className="text-4xl md:text-6xl font-light">
-              Choose Your Bar Service
-            </h2>
+              <h2 className="text-4xl font-light md:text-6xl">
+                Choose Your Bar Service
+              </h2>
+            </div>
+
+            <p className="max-w-xl text-lg leading-relaxed text-white/60">
+              Pricing depends on guest count, bartender count, service length,
+              event needs, and optional add-ons.
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid gap-8 lg:grid-cols-2">
             {packages.map((pkg) => (
               <div
                 key={pkg.name}
-                className="group overflow-hidden bg-[#18120d] border border-white/10 rounded-[2rem] hover:border-[#ffd700]/60 transition duration-300"
+                className={`group overflow-hidden rounded-[2rem] border bg-[#18120d] transition duration-500 hover:-translate-y-2 ${
+                  pkg.featured
+                    ? "border-[#ffd700]/60 shadow-2xl shadow-amber-950/30"
+                    : "border-white/10 hover:border-[#ffd700]/50"
+                }`}
               >
-                <div className="grid md:grid-cols-[0.9fr_1.1fr] h-full">
-                  <div className="relative min-h-[320px] overflow-hidden">
+                <div className="grid h-full md:grid-cols-[0.9fr_1.1fr]">
+                  <div className="relative min-h-[330px] overflow-hidden">
                     <img
                       src={pkg.image}
                       alt={pkg.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
 
-                    <div className="absolute bottom-5 left-5">
-                      <p className="text-[#ffd700] text-3xl font-bold">
+                    {pkg.featured && (
+                      <div className="absolute left-5 top-5 rounded-full bg-[#ffd700] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-black">
+                        Popular
+                      </div>
+                    )}
+
+                    <div className="absolute bottom-5 left-5 right-5">
+                      <p className="text-3xl font-bold text-[#ffd700]">
                         {pkg.price}
                       </p>
 
-                      <p className="text-white/75 text-sm mt-1">
+                      <p className="mt-1 text-sm text-white/75">
                         {pkg.guests}
                       </p>
                     </div>
                   </div>
 
                   <div className="p-8">
-                    <h3 className="text-3xl font-semibold mb-3">
+                    <h3 className="mb-3 text-3xl font-semibold">
                       {pkg.name}
                     </h3>
 
-                    <p className="text-white/60 mb-6">
+                    <p className="mb-6 text-white/60">
                       {pkg.bartenders}
                     </p>
 
-                    <ul className="space-y-3 mb-7">
+                    <ul className="mb-7 space-y-3">
                       {pkg.features.map((feature) => (
                         <li
                           key={feature}
-                          className="flex gap-3 text-white/75 leading-relaxed"
+                          className="flex gap-3 leading-relaxed text-white/75"
                         >
-                          <span className="text-[#ffd700]">•</span>
-                          {feature}
+                          <Check
+                            size={18}
+                            className="mt-1 shrink-0 text-[#ffd700]"
+                          />
+                          <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <p className="text-white/50 leading-relaxed text-sm">
+                    <p className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm leading-relaxed text-white/55">
                       {pkg.note}
                     </p>
                   </div>
@@ -271,28 +328,26 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* COI / LICENSE SECTION */}
-          <div className="mt-16 rounded-[2rem] border border-[#ffd700]/30 bg-[#18120d] px-8 py-10 text-center">
-            <p className="uppercase tracking-[0.3em] text-sm text-[#ffd700] font-semibold mb-4">
+          <div className="mt-16 rounded-[2rem] border border-[#ffd700]/30 bg-[#18120d] px-8 py-10 text-center shadow-2xl shadow-black/30">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#ffd700]">
               Fully Licensed & Insured
             </p>
 
-            <h3 className="text-3xl md:text-5xl font-light mb-5">
+            <h3 className="mb-5 text-3xl font-light md:text-5xl">
               Certificate of Insurance Provided Upon Request
             </h3>
 
-            <p className="max-w-3xl mx-auto text-white/70 text-lg leading-relaxed">
-              Bartender With A Smile can provide a Certificate of Insurance
-              upon request for venues, event planners, private events, and
-              corporate functions.
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-white/70">
+              Bartender With A Smile can provide a Certificate of Insurance upon
+              request for venues, event planners, private events, and corporate
+              functions.
             </p>
           </div>
         </div>
       </section>
 
-      {/* GALLERY STRIP */}
-      <section className="bg-[#111018] py-10 px-6 border-y border-white/10">
-        <div className="max-w-[1800px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <section className="border-y border-white/10 bg-[#111018] px-6 py-10">
+        <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
             "/images/fruitydrink.png",
             "/images/tam.png",
@@ -302,20 +357,19 @@ export default function ServicesPage() {
           ].map((image, index) => (
             <div
               key={`${image}-${index}`}
-              className="overflow-hidden bg-black border border-white/10"
+              className="overflow-hidden border border-white/10 bg-black"
             >
               <img
                 src={image}
                 alt="Bartender With A Smile gallery preview"
-                className="w-full h-[280px] object-cover hover:scale-105 transition duration-500"
+                className="h-[280px] w-full object-cover transition duration-500 hover:scale-105"
               />
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden bg-black py-24 px-6 lg:px-16">
+      <section className="relative overflow-hidden bg-black px-6 py-24 lg:px-16">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
           style={{
@@ -326,26 +380,31 @@ export default function ServicesPage() {
 
         <div className="absolute inset-0 bg-black/75" />
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <p className="uppercase tracking-[0.3em] text-sm text-[#ffd700] font-semibold mb-5">
-            Book Your Bartender
-          </p>
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-amber-300 backdrop-blur-xl">
+            <Sparkles size={18} />
 
-          <h2 className="text-4xl md:text-6xl font-light mb-8">
+            <span className="text-xs font-bold uppercase tracking-[0.28em]">
+              Book Your Bartender
+            </span>
+          </div>
+
+          <h2 className="mb-8 text-4xl font-light md:text-6xl">
             Need A Custom Quote?
           </h2>
 
-          <p className="text-white/75 text-xl leading-relaxed mb-10">
+          <p className="mb-10 text-lg leading-relaxed text-white/75 md:text-xl">
             Contact Bartender With A Smile to discuss your guest count, date,
             location, mixers, ice, juices, add-ons, and availability.
           </p>
 
-          <a
+          <Link
             href="/contact"
-            className="inline-block bg-[#ffd700] hover:bg-[#f5c400] text-black px-10 py-5 rounded-full font-bold transition"
+            className="inline-flex items-center gap-3 rounded-full bg-[#ffd700] px-10 py-5 font-bold text-black transition hover:scale-105 hover:bg-[#f5c400]"
           >
             Request A Quote
-          </a>
+            <ArrowUpRight size={18} />
+          </Link>
         </div>
       </section>
     </main>
